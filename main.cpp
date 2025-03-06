@@ -1,5 +1,43 @@
 #include <iostream>
 #include <string>
+
+// node structure for both stack and queue
+struct Node {
+  // data value
+  int data;
+
+  // pointer to the next node in the list
+  Node* next;
+
+  // constructor (initialize the data value and the next pointer)
+  Node(int val) : data(val), next(nullptr) {} 
+};
+
+// custom iterator class (for both stack and queue traversal)
+class ListIterator {
+private:
+  // pointer to the current node
+  Node* current;
+public:
+  // constructor (initialize the current pointer)
+  ListIterator(Node* node) : current(node) {}
+  
+  // dereference operator (return the data value of the current node)
+  int operator*() const { return current->data; } 
+
+  // pre-increment operator (return the updated iterator)
+  ListIterator& operator++() { current = current->next; return *this; } 
+
+  // inequality operator (compare the current pointers)
+  bool operator!=(const ListIterator& other) const { return current != other.current; }
+
+  // arrow operator (return the current node)
+  Node* operator->() { return current; }
+};
+
+
+
+
 void initialMenu();
 void stackMenu();
 void queueMenu();
