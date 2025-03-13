@@ -36,6 +36,83 @@ public:
 };
 
 
+class DoublyLinkedList {
+private:
+stack leftStack;
+stack rightStack;
+
+public:
+void addToEnd(int value) {
+rightStack.push(value);
+cout << "Added to end: " << value << endl;
+}
+
+void addToFront(int value) {
+    leftStack.push(value);
+    cout << "Added to front: " << value << endl;
+}
+void removeFromEnd() {
+    if (!rightStack.empty()) {
+        cout << "Removed from end: " << rightStack.top() << endl;
+        rightStack.pop();
+    } else if (!leftStack.empty()) {
+       
+        while (!leftStack.empty()) {
+            rightStack.push(leftStack.top());
+            leftStack.pop();
+        }
+        cout << "Removed from end: " << rightStack.top() << endl;
+        rightStack.pop();
+    } else {
+        cout << "List is empty. Nothing to remove from the end." << endl;
+    }
+}
+
+
+void removeFromFront() {
+    if (!leftStack.empty()) {
+        cout << "Removed from front: " << leftStack.top() << endl;
+        leftStack.pop();
+    } else if (!rightStack.empty()) {
+        
+        while (!rightStack.empty()) {
+            leftStack.push(rightStack.top());
+            rightStack.pop();
+        }
+        cout << "Removed from front: " << leftStack.top() << endl;
+        leftStack.pop();
+    } else {
+        cout << "List is empty. Nothing to remove from the front." << endl;
+    }
+}
+void display() {
+    queue<int> tempQueue;
+
+    stack<int> tempLeft = leftStack;
+    while (!tempLeft.empty()) {
+        tempQueue.push(tempLeft.top());
+        tempLeft.pop();
+    }
+
+    cout << "List (left to right): ";
+    while (!tempQueue.empty()) {
+        cout << tempQueue.front() << " ";
+        tempQueue.pop();
+    }
+
+    stack<int> tempRight;
+    while (!rightStack.empty()) {
+        tempRight.push(rightStack.top());
+        rightStack.pop();
+    }
+    while (!tempRight.empty()) {
+        cout << tempRight.top() << " ";
+        tempRight.pop();
+    }
+    cout << endl;
+}
+
+
 
 
 void initialMenu();
