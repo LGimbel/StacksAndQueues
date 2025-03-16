@@ -34,6 +34,53 @@ public:
   // arrow operator (return the current node)
   Node* operator->() { return current; }
 };
+#include <iostream>
+using namespace std;
+
+template <typename T>
+struct Node {
+    T data;
+    Node* next;
+    
+    Node(T val) : data(val), next(nullptr) {}
+};
+
+template <typename T>
+class Stack {
+private:
+    Node<T>* head;
+
+public:
+    Stack() : head(nullptr) {}
+
+    void push(T val) {
+        Node<T>* newNode = new Node<T>(val);
+        newNode->next = head;
+        head = newNode;
+        cout << "Pushed: " << val << endl;
+    }
+
+    void pop() {
+        if (!head) {
+            cout << "Stack is empty!\n";
+            return;
+        }
+        Node<T>* temp = head;
+        cout << "Popped: " << temp->data << endl;
+        head = head->next;
+        delete temp;
+    }
+
+    void display() {
+        Node<T>* temp = head;
+        cout << "Stack (Top to Bottom): ";
+        while (temp) {
+            cout << temp->data << " ";
+            temp = temp->next;
+        }
+        cout << endl;
+    }
+};
 
 
 
