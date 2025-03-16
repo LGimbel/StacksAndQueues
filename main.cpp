@@ -34,8 +34,6 @@ public:
   // arrow operator (return the current node)
   Node* operator->() { return current; }
 };
-#include <iostream>
-using namespace std;
 
 template <typename T>
 struct Node {
